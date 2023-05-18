@@ -3,7 +3,7 @@
 1. Clone the project into your **XAMPP/xamppfiles/htdocs** directory.
 
 ```
-git clone https://github.com/OC-ComputerScience/recipe-backend.git
+git clone https://github.com/Surya2987/travel-backend.git
 ```
 
 2. Install the project.
