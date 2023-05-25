@@ -23,6 +23,9 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to the Travel Itenary API." });
 });
 
+app.get("/testing", (req, res) => {
+  res.json({ message: "Welcome to the Travel Itenary Testing." });
+});
 // set port, listen for requests
 const PORT = process.env.PORT || 3200;
 if (process.env.NODE_ENV !== "test") {
