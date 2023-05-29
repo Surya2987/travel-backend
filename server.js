@@ -4,6 +4,7 @@ const { sequelize } = require('./app/models/Itinerary');
 const authRoutes  = require("./app/routers/authRouter");
 const userRoutes  = require("./app/routers/userRouter");
 const eventRoutes = require('./app/routers/eventRouter');
+const hotelRoutes = require('./app/routers/hotelRouter');
 
 const cors = require("cors");
 
@@ -20,6 +21,7 @@ app.use(bodyParser.json());
 app.use(authRoutes);
 app.use(userRoutes);
 app.use('/events',eventRoutes);
+app.use('/hotels',eventRoutes);
 
 //uncomment to create tables
 
