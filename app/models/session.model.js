@@ -1,14 +1,15 @@
-module.exports = (sequelize, Sequelize) => {
-  const Session = sequelize.define("session", {
+const { Sequelize, DataTypes } = require('sequelize');
+const sequelize = require('../config/database');
+
+const Session = sequelize.define('Session', {
     email: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     expirationDate: {
-      type: Sequelize.DATE,
+      type: DataTypes.DATE,
       allowNull: false,
     },
-  });
+ });
 
-  return Session;
-};
+module.exports = Session;
