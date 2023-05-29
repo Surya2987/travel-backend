@@ -1,28 +1,27 @@
-const { saltSize, keySize } = require("../authentication/crypto");
+const { Sequelize, DataTypes } = require('sequelize');
+const sequelize = require('../config/database');
 
-module.exports = (sequelize, Sequelize) => {
-  const User = sequelize.define("user", {
+const User = sequelize.define('User', {
     firstName: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     lastName: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     email: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     password: {
-      type: Sequelize.BLOB,
+      type: DataTypes.BLOB,
       allowNull: false,
     },
     salt: {
-      type: Sequelize.BLOB,
+      type: DataTypes.BLOB,
       allowNull: false,
     },
   });
 
-  return User;
-};
+module.exports = User;
