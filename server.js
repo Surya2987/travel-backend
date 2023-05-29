@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const { sequelize } = require('./app/models/Itinerary');
 const authRoutes  = require("./app/routers/authRouter");
 const userRoutes  = require("./app/routers/userRouter");
+const eventRoutes = require('./app/routers/eventRouter');
 
 const cors = require("cors");
 
@@ -18,6 +19,7 @@ app.options("*", cors());
 app.use(bodyParser.json());
 app.use(authRoutes);
 app.use(userRoutes);
+app.use('/events',eventRoutes);
 
 //uncomment to create tables
 
