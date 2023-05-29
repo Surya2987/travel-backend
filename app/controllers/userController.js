@@ -1,11 +1,12 @@
-const db = require("../models");
-const User = db.user;
-const Session = db.session;
-const Op = db.Sequelize.Op;
+const User = require('../models/user');
+const Session = require('../models/session');
+const sequelize = require('../config/database');
+const Op = sequelize.Op;
 const { encrypt, getSalt, hashPassword } = require("../authentication/crypto");
 
 // Create and Save a new User
 exports.create = async (req, res) => {
+  console.log("user",req.body)
   // Validate request
   if (req.body.firstName === undefined) {
     const error = new Error("First name cannot be empty for user!");
@@ -33,10 +34,11 @@ exports.create = async (req, res) => {
   })
     .then(async (data) => {
       if (data) {
-        return "This email is already in use.";
+        res.status(500).send({
+          message: "This email is already in use.",
+        });
       } else {
         console.log("email not found");
-
         let salt = await getSalt();
         let hash = await hashPassword(req.body.password, salt);
 

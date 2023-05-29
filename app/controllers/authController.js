@@ -1,9 +1,8 @@
-const db = require("../models");
-const { authenticate } = require("../authentication/authentication");
-const User = db.user;
-const Session = db.session;
-const Op = db.Sequelize.Op;
-const { encrypt } = require("../authentication/crypto");
+
+const User = require('../models/user');
+const Session = require('../models/session');
+const { authenticate } = require("../authentication/authentication")
+const { encrypt } = require("../authentication/crypto")
 
 exports.login = async (req, res) => {
   let { userId } = await authenticate(req, res, "credentials");
