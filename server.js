@@ -1,37 +1,33 @@
-require("dotenv").config();
+const express = require('express');
+const bodyParser = require('body-parser');
+const { sequelize } = require('./app/models/Itinerary');
+const authRoutes  = require("./app/routers/authRouter");
+const userRoutes  = require("./app/routers/userRouter");
 
-const express = require("express");
 const cors = require("cors");
 
 const app = express();
+const PORT = 3200;
 
-var corsOptions = {
+let corsOptions = {
   origin: "http://localhost:8081",
 };
-
 app.use(cors(corsOptions));
 app.options("*", cors());
 
-// parse requests of content-type - application/json
-app.use(express.json());
+app.use(bodyParser.json());
+app.use(authRoutes);
+app.use(userRoutes);
 
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));
+//uncomment to create tables
 
-// simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to the Travel Itenary API." });
+sequelize.sync().then(() => {
+  console.log('Database synced');
+}).catch((error) => {
+  console.error('Error syncing database:', error);
 });
 
-app.get("/testing", (req, res) => {
-  res.json({ message: "Welcome to the Travel Itenary Testing." });
-});
-// set port, listen for requests
-const PORT = process.env.PORT || 3200;
-if (process.env.NODE_ENV !== "test") {
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}.`);
-  });
-}
 
-module.exports = app;
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
+});
