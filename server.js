@@ -12,7 +12,7 @@ const app = express();
 const PORT = 3200;
 
 let corsOptions = {
-  origin: "http://localhost:8081",
+  origin: "*",
 };
 app.use(cors(corsOptions));
 app.options("*", cors());
