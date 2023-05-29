@@ -6,6 +6,7 @@ const userRoutes  = require("./app/routers/userRouter");
 const eventRoutes = require('./app/routers/eventRouter');
 const hotelRoutes = require('./app/routers/hotelRouter');
 const itineraryRoutes = require('./app/routers/ItineraryRouter');
+const sightseeingRoutes = require('./app/routers/sightseeingRouter');
 
 const cors = require("cors");
 
@@ -24,6 +25,7 @@ app.use(userRoutes);
 app.use('/events',eventRoutes);
 app.use('/hotels',eventRoutes);
 app.use('/trips',itineraryRoutes);
+app.use('/sightseeing',sightseeingRoutes);
 
 //uncomment to create tables
 
