@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 app.use(authRoutes);
 app.use(userRoutes);
 app.use('/events',eventRoutes);
-app.use('/hotels',eventRoutes);
+app.use('/hotels',hotelRoutes);
 app.use('/trips',itineraryRoutes);
 app.use('/sightseeing',sightseeingRoutes);
 
