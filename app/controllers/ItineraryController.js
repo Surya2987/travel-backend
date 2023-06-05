@@ -5,7 +5,7 @@ const OrderHistory = require('../models/orderHistory');
 const Event = require('../models/event');
 const HotelStay = require('../models/hotelStay');
 const SightSeeing = require('../models/sightseeing');
-const db = require('../models/index');
+//const db = require('../models/index');
 // const sequelize = db.sequelize;
 
 // Get all itineraries
