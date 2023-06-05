@@ -9,10 +9,6 @@ const OrderHistory = sequelize.define('OrderHistory', {
     primaryKey: true,
     autoIncrement: true
   },
-  bookingDate: {
-    type: DataTypes.DATEONLY,
-    allowNull: false
-  },
   itineraryId: {
     type: DataTypes.INTEGER,
     allowNull: false
@@ -21,14 +17,10 @@ const OrderHistory = sequelize.define('OrderHistory', {
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  totalPersons: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
   totalCost: {
     type: DataTypes.FLOAT,
     allowNull: false
-  }
+  },
 });
 
 OrderHistory.belongsTo(User, { foreignKey: 'bookedBy' });
