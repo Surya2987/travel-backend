@@ -38,15 +38,7 @@ exports.getAllItineraries = async (req, res) => {
 exports.getItineraryById = async (req, res) => {
   const { id } = req.params;
   try {
-    const itinerary = await Itinerary.findByPk(id, {
-      include: [
-        {
-          model: Day,
-          where: { id: dayId },
-          include: [Event, HotelStay, SightSeeing],
-        },
-      ],
-    });
+    const itinerary = await Itinerary.findByPk(id,{ include: [{ model: Day, as: 'Days' }] });
     if (itinerary) {
       res.status(200).json(itinerary);
     } else {
