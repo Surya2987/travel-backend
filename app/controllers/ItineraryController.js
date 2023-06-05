@@ -5,29 +5,29 @@ const OrderHistory = require('../models/orderHistory');
 const Event = require('../models/event');
 const HotelStay = require('../models/hotelStay');
 const SightSeeing = require('../models/sightseeing');
-//const db = require('../models/index');
-// const sequelize = db.sequelize;
+const { sequelize } = require('../models/Itinerary');
+
 
 // Get all itineraries
 exports.getAllItineraries = async (req, res) => {
   try {
-    // const { origin, destination, starts, ends } = req.query;
+    const { origin, destination, starts, ends } = req.query;
 
-    // const check = {
-    //   [Op.and]: [],
-    // };
-    // if (origin) {
-    //   check[Op.and].push({ origin: { [Op.like]: `%${origin}%` } });
-    // }
-    // if (destination) {
-    //   check[Op.and].push({ destination: { [Op.like]: `%${destination}%` } });
-    // }
-    // if (starts) {
-    //   check[Op.and].push({ start_date: sequelize.where(sequelize.fn('DATE', sequelize.col('start_date')), starts) });
-    // }
-    // if (ends) {
-    //   check[Op.and].push({ end_date: sequelize.where(sequelize.fn('DATE', sequelize.col('end_date')), ends) });
-    // }
+    const check = {
+      [Op.and]: [],
+    };
+    if (origin) {
+      check[Op.and].push({ origin: { [Op.like]: `%${origin}%` } });
+    }
+    if (destination) {
+      check[Op.and].push({ destination: { [Op.like]: `%${destination}%` } });
+    }
+    if (starts) {
+      check[Op.and].push({ start_date: sequelize.where(sequelize.fn('DATE', sequelize.col('start_date')), starts) });
+    }
+    if (ends) {
+      check[Op.and].push({ end_date: sequelize.where(sequelize.fn('DATE', sequelize.col('end_date')), ends) });
+    }
     const itineraries = await Itinerary.findAll();
     res.status(200).json(itineraries);
   } catch (error) {
