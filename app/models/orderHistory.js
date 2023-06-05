@@ -10,7 +10,7 @@ const OrderHistory = sequelize.define('OrderHistory', {
     autoIncrement: true
   },
   bookingDate: {
-    type: DataTypes.DATE,
+    type: DataTypes.DATEONLY,
     allowNull: false
   },
   itineraryId: {
