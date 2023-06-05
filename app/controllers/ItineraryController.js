@@ -28,7 +28,7 @@ exports.getAllItineraries = async (req, res) => {
     if (ends) {
       check[Op.and].push({ end_date: sequelize.where(sequelize.fn('DATE', sequelize.col('end_date')), ends) });
     }
-    const itineraries = await Itinerary.findAll();
+    const itineraries = await Itinerary.findAll({ where: check });
     res.status(200).json(itineraries);
   } catch (error) {
     console.log(error);
