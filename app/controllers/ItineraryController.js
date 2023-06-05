@@ -5,7 +5,6 @@ const OrderHistory = require('../models/orderHistory');
 const Event = require('../models/event');
 const HotelStay = require('../models/hotelStay');
 const SightSeeing = require('../models/sightseeing');
-const Day = require('../models/day')
 
 // Get all itineraries
 exports.getAllItineraries = async (req, res) => {
