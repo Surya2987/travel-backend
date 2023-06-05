@@ -16,10 +16,6 @@ const Itinerary = sequelize.define('Itinerary', {
     type: DataTypes.TEXT,
     allowNull: false
   },
-  maxCapacity: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
   costPerPerson: {
     type: DataTypes.FLOAT,
     allowNull: false
@@ -28,13 +24,25 @@ const Itinerary = sequelize.define('Itinerary', {
     type: DataTypes.FLOAT,
     allowNull: false
   },
-  bookingsMade: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
   imageUrl: {
     type: DataTypes.STRING,
     allowNull: false
+  },
+  origin: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  destination: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  start_date: {
+    allowNull: true,
+    type: DataTypes.DATEONLY,
+  },
+  end_date: {
+    allowNull: true,
+    type: DataTypes.DATEONLY,
   }
 });
 

@@ -5,11 +5,28 @@ const OrderHistory = require('../models/orderHistory');
 const Event = require('../models/event');
 const HotelStay = require('../models/hotelStay');
 const SightSeeing = require('../models/sightseeing');
-
+const Day = require('../models/day')
 
 // Get all itineraries
 exports.getAllItineraries = async (req, res) => {
   try {
+    const { origin, destination, starts, ends } = req.query;
+
+    const check = {
+      [Op.and]: [],
+    };
+    if (origin) {
+      check[Op.and].push({ origin: { [Op.like]: `%${origin}%` } });
+    }
+    if (destination) {
+      check[Op.and].push({ destination: { [Op.like]: `%${destination}%` } });
+    }
+    if (starts) {
+      check[Op.and].push({ start_date: sequelize.where(sequelize.fn('DATE', sequelize.col('start_date')), starts) });
+    }
+    if (ends) {
+      check[Op.and].push({ end_date: sequelize.where(sequelize.fn('DATE', sequelize.col('end_date')), ends) });
+    }
     const itineraries = await Itinerary.findAll();
     res.status(200).json(itineraries);
   } catch (error) {
@@ -22,7 +39,15 @@ exports.getAllItineraries = async (req, res) => {
 exports.getItineraryById = async (req, res) => {
   const { id } = req.params;
   try {
-    const itinerary = await Itinerary.findByPk(id);
+    const itinerary = await Itinerary.findByPk(id, {
+      include: [
+        {
+          model: Day,
+          where: { id: dayId },
+          include: [Event, HotelStay, SightSeeing],
+        },
+      ],
+    });
     if (itinerary) {
       res.status(200).json(itinerary);
     } else {
@@ -35,14 +60,18 @@ exports.getItineraryById = async (req, res) => {
 
 // Create a new itinerary
 exports.createItinerary = async (req, res) => {
-  const { title, description, maxCapacity, costPerPerson, rating } = req.body;
+  const { title, description, costPerPerson, rating,imageUrl,start_date,end_date,origin,destination } = req.body;
   try {
     const itinerary = await Itinerary.create({
       title,
       description,
-      maxCapacity,
       costPerPerson,
       rating,
+      imageUrl,
+      start_date,
+      end_date,
+      origin,
+      destination
     });
     res.status(201).json(itinerary);
   } catch (error) {
@@ -53,16 +82,20 @@ exports.createItinerary = async (req, res) => {
 // Update an itinerary by ID
 exports.updateItinerary = async (req, res) => {
   const { id } = req.params;
-  const { title, description, maxCapacity, costPerPerson, rating } = req.body;
+  const { title, description, costPerPerson, rating,imageUrl,start_date,end_date,origin,destination } = req.body;
   try {
     const itinerary = await Itinerary.findByPk(id);
     if (itinerary) {
       await itinerary.update({
         title,
         description,
-        maxCapacity,
         costPerPerson,
         rating,
+        imageUrl,
+        start_date,
+        end_date,
+        origin,
+        destination
       });
       res.status(200).json(itinerary);
     } else {
