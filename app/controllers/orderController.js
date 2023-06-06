@@ -47,19 +47,14 @@ exports.createOrder = async (req, res) => {
 exports.getOrdersOfUser = async (req, res) => {
     const { id } = req.params;
     try {
-        const check = {
-            [Op.and]: [],
-        };
-        check[Op.and].push({ bookedBy: id });
-        const order = await Order.findOne({ where: check }); // Changed `findByPk` to `findOne`
-        if (order) {
-            res.status(200).json(order);
+        const orders = await Order.findAll({ where: { bookedBy: id } });
+        if (orders.length > 0) {
+            res.status(200).json(orders);
         } else {
-            res.status(404).json({ error: 'Orders are not found for user' });
+            res.status(404).json({ error: 'No orders found for the user' });
         }
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error: 'Internal server error' });
     }
-};
+}
 
