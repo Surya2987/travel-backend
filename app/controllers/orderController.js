@@ -49,16 +49,17 @@ exports.getOrdersOfUser = async (req, res) => {
     try {
         const check = {
             [Op.and]: [],
-            };
-        check[Op.and].push({ bookedBy: id});
-        const order = await Order.findByPk({ where: check });
+        };
+        check[Op.and].push({ bookedBy: id });
+        const order = await Order.findOne({ where: check }); // Changed `findByPk` to `findOne`
         if (order) {
             res.status(200).json(order);
         } else {
-            res.status(404).json({ error: 'orders are not found for user' });
+            res.status(404).json({ error: 'Orders are not found for user' });
         }
     } catch (error) {
-      console.log(error);
-      res.status(500).json({ error: 'Internal server error' });
+        console.log(error);
+        res.status(500).json({ error: 'Internal server error' });
     }
-  };
+};
+
