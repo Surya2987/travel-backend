@@ -24,7 +24,7 @@ exports.createHotelStay = async (req, res) => {
 };
 
 exports.getHotelStayById = async (req, res) => {
-  const {hotelStayId} = req.params;
+  const hotelStayId = req.params.id;
 
   try {
     const hotelStay = await HotelStay.findByPk(hotelStayId);
