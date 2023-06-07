@@ -24,7 +24,7 @@ exports.createEvent = async (req, res) => {
 };
 
 exports.getEventById = async (req, res) => {
-  const {eventId} = req.params;
+  const eventId = req.params.id;
 
   try {
     const event = await Event.findByPk(eventId);
