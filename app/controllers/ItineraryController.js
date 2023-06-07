@@ -173,19 +173,15 @@ exports.getItineraryPlan = async (req, res) => {
 exports.getDayDetails = async (req, res) => {
   const { itineraryId, dayId } = req.params;
   try {
-    const itinerary = await Itinerary.findByPk(itineraryId, {
-      include: [
-        {
-          model: Day,
-          where: { id: dayId },
-          include: [Event, HotelStay, SightSeeing],
-        },
-      ],
+    const day = await Day.findOne({
+      where: { id: dayId, ItineraryId: itineraryId },
+      include: [Event, HotelStay, SightSeeing],
     });
-    if (itinerary) {
-      res.status(200).json(itinerary);
+
+    if (day) {
+      res.status(200).json(day);
     } else {
-      res.status(404).json({ error: 'Itinerary not found' });
+      res.status(404).json({ error: 'Day not found' });
     }
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
