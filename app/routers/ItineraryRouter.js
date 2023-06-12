@@ -33,5 +33,7 @@ router.get('/special/:id/plan', itineraryController.getItineraryPlan);
 // Get the details of a day associated with an itinerary
 router.get('/:itineraryId/days/:dayId', itineraryController.getDayDetails);
 
+router.post('/addDay',itineraryController.addDay);
+
 
 module.exports = router;
