@@ -22,6 +22,10 @@ const User = sequelize.define('User', {
       type: DataTypes.BLOB,
       allowNull: false,
     },
+    isAdmin: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    }
   });
 
 module.exports = User;
