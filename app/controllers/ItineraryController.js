@@ -191,8 +191,8 @@ exports.getDayDetails = async (req, res) => {
 // Create a new day
 exports.addDay = async (req, res) => {
   try {
-    const itinerary = await Itinerary.create(req.body);
-    res.status(201).json(itinerary);
+    const day = await Day.create(req.body);
+    res.status(201).json(day);
   } catch (error) {
     res.status(500).json({ error: error || 'Internal server error' });
   }
