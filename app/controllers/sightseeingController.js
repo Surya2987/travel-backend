@@ -70,7 +70,7 @@ exports.deleteSightseeing = async (req, res) => {
     }
 
     await sightseeing.destroy();
-    res.sendStatus(204);
+    return res.status(200).json({ message: 'Sightseeing is Deleted' });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });
