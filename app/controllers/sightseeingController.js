@@ -39,11 +39,11 @@ exports.getSightseeingById = async (req, res) => {
 };
 
 exports.updateSightseeing = async (req, res) => {
-  const {sightseeingId} = req.params;
+  const {id} = req.params;
   const { name, description, imageUrl } = req.body;
 
   try {
-    const sightseeing = await Sightseeing.findByPk(sightseeingId);
+    const sightseeing = await Sightseeing.findByPk(id);
     if (!sightseeing) {
       return res.status(404).json({ message: 'Sightseeing not found' });
     }
@@ -61,10 +61,10 @@ exports.updateSightseeing = async (req, res) => {
 };
 
 exports.deleteSightseeing = async (req, res) => {
-  const {sightseeingId} = req.params;
+  const {id} = req.params;
 
   try {
-    const sightseeing = await Sightseeing.findByPk(sightseeingId);
+    const sightseeing = await Sightseeing.findByPk(id);
     if (!sightseeing) {
       return res.status(404).json({ message: 'Sightseeing not found' });
     }
